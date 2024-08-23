@@ -1,0 +1,80 @@
+input * {
+	xkb_layout jp
+}
+
+bar {
+	swaybar_command waybar
+}
+
+set $mod Mod4
+
+set $ws1 "1: main"
+set $ws2 "2: develop"
+set $ws3 "3: discord"
+set $ws4 "4: browse"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8: game"
+set $ws9 "9: sub"
+set $ws0 "10: media"
+
+output "*" bg /usr/share/backgrounds/archlinux/small.png fill
+
+font pango:hack-nerd-font 12
+
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec wofi --show drun
+bindsym $mod+b exec vivaldi
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+l workspace next
+bindsym $mod+Shift+h workspace prev
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws0
+
+workspace $ws1 output DP-1 DP-2 HDMI-A-2
+workspace $ws2 output DP-1 DP-2 HDMI-A-2
+workspace $ws3 output DP-1 DP-2 HDMI-A-2
+workspace $ws4 output DP-1 DP-2 HDMI-A-2
+workspace $ws9 output eDP-1 HDMI-A-3
+workspace $ws0 output eDP-1 HDMI-A-3
+
+
+bindsym $mod+q kill
+
+bindsym $mod+shift+s exec grimshot --notify save area ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
+
+bindsym $mod+Shift+r exec swaylock -f -C ~/.config/swaylock/config
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+exec blueman-applet
+for_window [app_id="blueman-manager"] floating enable
+exec mako
+exec fcitx5 &
+
+# Window decoration
+## class                border  backgr. text    indicator
+client.unfocused        #2e3440 #1f222d #888888 #1f222d
+client.focused_inactive #2e3440 #1f222d #888888 #1f222d
+client.placeholder      #2e3440 #1f222d #888888 #1f222d
+client.urgent           #900000 #900000 #ffffff #900000
+
+client.background       #242424
