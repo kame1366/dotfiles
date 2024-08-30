@@ -12,24 +12,35 @@ set $ws1 "1: main"
 set $ws2 "2: develop"
 set $ws3 "3: discord"
 set $ws4 "4: browse"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
+set $ws5 "5: tasks"
+set $ws6 "6: debug"
+set $ws7 "7: tests"
 set $ws8 "8: game"
 set $ws9 "9: sub"
 set $ws0 "10: media"
 
-output "*" bg /usr/share/backgrounds/archlinux/small.png fill
+font pango:hack-nerd-font 0.1
 
-font pango:hack-nerd-font 12
+output "*" bg /home/mataneko/Downloads/wall_style1_nologo.png fill
+
+set $opacity 0.9
+for_window [class=".*"] opacity $opacity
+for_window [app_id=".*"] opacity $opacity
+
+default_border none 
+for_window [title="^.*"] title_format ""
+default_border normal 0
+default_floating_border normal 0
+
+gaps inner 10
 
 bindsym $mod+Return exec alacritty
 bindsym $mod+d exec wofi --show drun
-bindsym $mod+b exec vivaldi
+bindsym $mod+b exec firefox-developer-edition
 
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+l workspace next
-bindsym $mod+Shift+h workspace prev
+bindsym $mod+Shift+Right workspace next
+bindsym $mod+Shift+Left workspace prev
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -51,30 +62,27 @@ workspace $ws0 output eDP-1 HDMI-A-3
 
 
 bindsym $mod+q kill
+bindsym $mod+r mode "resize"
 
 bindsym $mod+shift+s exec grimshot --notify save area ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 
 bindsym $mod+Shift+r exec swaylock -f -C ~/.config/swaylock/config
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+
 
 exec blueman-applet
 for_window [app_id="blueman-manager"] floating enable
 exec mako
 exec fcitx5 &
 
-# Window decoration
-## class                border  backgr. text    indicator
-client.unfocused        #2e3440 #1f222d #888888 #1f222d
-client.focused_inactive #2e3440 #1f222d #888888 #1f222d
-client.placeholder      #2e3440 #1f222d #888888 #1f222d
-client.urgent           #900000 #900000 #ffffff #900000
+include /etc/sway/config.d/*
 
-client.background       #242424
