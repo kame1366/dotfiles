@@ -20,6 +20,13 @@ return {
 				"scss",
 				"sql",
 				"svelte",
+				"html",
+				"c",
+				"python",
+				"lua",
+				"javascript",
+				"typescript",
+				"tsx"
 			},
 
 			-- matchup = {
