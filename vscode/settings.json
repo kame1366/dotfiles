@@ -1,0 +1,388 @@
+{
+    "editor.fontSize": 17,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true
+    },
+    "editor.fontFamily": "Hack Nerd Font",
+    "git.ignoreMissingGitWarning": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.iconTheme": "material-icon-theme",
+    "python.createEnvironment.trigger": "off",
+    "editor.minimap.enabled": false,
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorTheme": "Catppuccin Frappé",
+    "window.commandCenter": false,
+    "extensions.ignoreRecommendations": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.guides.bracketPairs": true,
+    "editor.lineHeight": 1.5,
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.snippetSuggestions": "top",
+    "editor.wordBasedSuggestions": "allDocuments",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": null,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.pylance": "always"
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/node_modules/**": true,
+        "**/tmp/**": true
+    },
+    "editor.accessibilitySupport": "off",
+    "editor.smoothScrolling": false,
+    "workbench.sideBar.location": "right",
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "vim.leader": " ",
+    "vim.useCtrlKeys": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Do things without affecting registers
+        {
+            "before": [
+                "x"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "x"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "p"
+            ],
+            "after": [
+                "\"",
+                "0",
+                "p"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "P"
+            ],
+            "after": [
+                "\"",
+                "0",
+                "P"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "c"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "C"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "C"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "D"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "D"
+            ]
+        },
+        // Increment/decrement
+        {
+            "before": [
+                "+"
+            ],
+            "after": [
+                "<C-a>"
+            ]
+        },
+        {
+            "before": [
+                "-"
+            ],
+            "after": [
+                "<C-x>"
+            ]
+        },
+        // Delete a word backwards
+        {
+            "before": [
+                "d",
+                "w"
+            ],
+            "after": [
+                "v",
+                "b",
+                "\"",
+                "_",
+                "d"
+            ]
+        },
+        // Select all
+        {
+            "before": [
+                "<C-a>"
+            ],
+            "after": [
+                "g",
+                "g",
+                "<S-v>",
+                "G"
+            ]
+        },
+        // Disable continuations
+        {
+            "before": [
+                "<leader>",
+                "o"
+            ],
+            "after": [
+                "o",
+                "<Esc>",
+                "^",
+                "D",
+                "a"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "O"
+            ],
+            "after": [
+                "O",
+                "<Esc>",
+                "^",
+                "D",
+                "a"
+            ]
+        },
+        // Jumplist
+        {
+            "before": [
+                "<C-m>"
+            ],
+            "after": [
+                "<C-i>"
+            ]
+        },
+        // New tab
+        {
+            "before": [
+                "t",
+                "e"
+            ],
+            "commands": [
+                ":tabedit"
+            ]
+        },
+        {
+            "before": [
+                "<Tab>"
+            ],
+            "commands": [
+                ":tabnext"
+            ]
+        },
+        {
+            "before": [
+                "<S-Tab>"
+            ],
+            "commands": [
+                ":tabprev"
+            ]
+        },
+        // Split window
+        {
+            "before": [
+                "s",
+                "s"
+            ],
+            "commands": [
+                ":split"
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "v"
+            ],
+            "commands": [
+                ":vsplit"
+            ]
+        },
+        // Move window
+        {
+            "before": [
+                "s",
+                "h"
+            ],
+            "after": [
+                "<C-w>",
+                "h"
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "k"
+            ],
+            "after": [
+                "<C-w>",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "j"
+            ],
+            "after": [
+                "<C-w>",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "l"
+            ],
+            "after": [
+                "<C-w>",
+                "l"
+            ]
+        },
+        // Resize window
+        {
+            "before": [
+                "<C-w>",
+                "<left>"
+            ],
+            "after": [
+                "<C-w>",
+                "<"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "<right>"
+            ],
+            "after": [
+                "<C-w>",
+                ">"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "<up>"
+            ],
+            "after": [
+                "<C-w>",
+                "+"
+            ]
+        },
+        {
+            "before": [
+                "<C-w>",
+                "<down>"
+            ],
+            "after": [
+                "<C-w>",
+                "-"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "p"
+            ],
+            "after": [
+                "\"",
+                "0",
+                "p"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "c"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "C"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "C"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "D"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "D"
+            ]
+        }
+    ],
+    "editor.renderLineHighlight": "all",
+    "editor.renderLineHighlightOnlyWhenFocus": true,
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": "explicit",
+    "workbench.tree.indent": 24,
+    "window.title": " "
+}
