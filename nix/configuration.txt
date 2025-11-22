@@ -1,0 +1,155 @@
+# ===== configuration.nix (NixOS) — Sway 専用 1ファイル構成例
+# カスタマイズ済版: ユーザー名 = mataneko, ホスト名 = mataneko-nix
+# 使い方:
+#  1) このファイルを /etc/nixos/configuration.nix に置き、`sudo nixos-rebuild switch` を実行します。
+#  2) 初回ログイン後に ~/.config/sway/config や ~/.config/waybar/ を作成して調整してください。
+#
+# 注意:
+#  - Intel/AMD (Mesa) を想定しています。NVIDIA の場合は hardware.nvidia を追加してください。
+#  - SDDM をディスプレイマネージャとして有効にしています。不要なら無効化すれば TTY から sway を起動できます。
+
+{ config, pkgs, lib, ... }:
+
+let
+  myUser = "mataneko";
+in
+{
+  imports = [ ];
+
+  # --- 基本設定 -------------------------------------------------------------
+  networking.hostName = "mataneko-nix";
+  time.timeZone = "Asia/Tokyo";
+  i18n.defaultLocale = "ja_JP.UTF-8";
+
+  # ブートローダ（UEFI + systemd-boot の例）
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # --- パッケージ -----------------------------------------------------------
+  environment.systemPackages = with pkgs; [
+    # 基本ツール
+    vim
+    git
+    curl
+    wget
+
+    # 端末 / ファイルマネージャ
+    ghostty       # ユーザー指定の端末
+    kitty
+    thunar
+
+    # ブラウザ
+    firefox
+    vivaldi
+
+    # 通信 / 音楽
+    discord
+    spotify
+
+    # Wayland 関連ユーティリティ
+    sway
+    swayidle
+    swaylock
+    wl-clipboard
+    mako
+    grim
+    slurp
+    waybar
+    wlogout
+
+    # フォント
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+  ];
+
+  # --- ハードウェア / グラフィックス ---------------------------------------
+  hardware.opengl.enable = true;
+
+  # --- サウンド / マルチメディア -------------------------------------------
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true; # pipewire-pulse
+  };
+
+  # xdg-desktop-portal（スクリーン共有、Wayland 用ポータル）
+  services.xdg.portal.enable = true;
+  services.xdg.portal.package = pkgs.xdg-desktop-portal;
+
+  # Polkit（GUI の権限昇格用）
+  security.polkit.enable = true;
+
+  # --- ディスプレイマネージャ ---------------------------------------------
+  services.displayManager.sddm = {
+    enable = true;
+    wayland = { enable = true; };
+  };
+
+  # X11 を無効化（Wayland 前提）
+  services.xserver.enable = false;
+
+  # --- Sway の有効化 -------------------------------------------------------
+  programs.sway.enable = true;
+  programs.sway.enableWayland = true;
+  programs.sway.wrapperFeatures = { gtk = true; };
+
+  # --- 日本語入力 (fcitx5 + Mozc) ----------------------------------------
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [ fcitx5-gtk fcitx5-qt fcitx5-mozc ];
+    };
+  };
+
+  # --- ユーザー設定 ---------------------------------------------------------
+  users.users = {
+    "${myUser}" = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "audio" "video" "input" ];
+      uid = 1000;
+      home = "/home/${myUser}";
+      shell = pkgs.zsh;
+    };
+  };
+
+  # sudo 権限
+  security.sudo = { enable = true; wheelNeedsPassword = false; };
+
+  # --- systemd user サービス例（kanshi: ディスプレイ自動設定） -----------
+  systemd.user.enable = true;
+  systemd.user.services.kanshi = {
+    description = "kanshi daemon";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.kanshi}/bin/kanshi -c /home/${myUser}/.config/kanshi/config";
+    };
+    wantedBy = [ "default.target" ];
+  };
+
+  # --- ログインセッション環境変数 -----------------------------------------
+  environment.variables = {
+    XDG_SESSION_TYPE = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    GTK_IM_MODULE = "fcitx5";
+    QT_IM_MODULE = "fcitx5";
+    XMODIFIERS = "@im=fcitx5";
+  };
+
+  # --- system services -----------------------------------------------------
+  services.openssh.enable = true;
+  services.logind.enable = true;
+
+  # --- swap / kernel params ------------------------------------------------
+  swapDevices = [ { device = "/swapfile"; size = 2048; } ];
+  boot.kernelParams = [ "systemd.unified_cgroup_hierarchy=1" ];
+
+  # --- 最後の注意点 ---------------------------------------------------------
+  # - このファイルを /etc/nixos/configuration.nix に置いて `sudo nixos-rebuild switch` を実行してください。
+  # - ~/.config/sway/config や ~/.config/waybar/config はこの宣言だけでは作成されないため、ログイン後に作成してください。
+  # - vivaldi や ghostty は nixpkgs に存在しますが、チャンネルによってバージョンが異なることがあります。
+  # - fcitx5-mozc を有効にしています。入力法の候補・辞書を切り替えたい場合は fcitx5 の設定ツールを使ってください。
+
+}
