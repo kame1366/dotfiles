@@ -1,9 +1,16 @@
 return {
-  "craftzdog/solarized-osaka.nvim",
+  "folke/tokyonight.nvim",
   lazy = false,
   priority = 1000,
-  transparent = true,
-  opts = function()
-    vim.cmd("colorscheme solarized-osaka")
-  end,
+  opts = {},
+  config = function()
+    require("tokyonight").setup({
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    })
+    vim.cmd [[colorscheme tokyonight]]
+  end
 }

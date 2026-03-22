@@ -7,14 +7,4 @@ return {
       mode = "tabs",
     },
   },
-  config = function()
-    local bufferline = require("bufferline")
-
-    bufferline.setup({
-      highlights = {
-        background = { bg = "none" },
-        fill = { bg = "none" },
-      }
-    })
-  end
 }
